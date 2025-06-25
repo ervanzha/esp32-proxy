@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // 🔁 Streaming dari ESP32-CAM
-const ESP32_URL = 'http://192.168.127.26:81/stream'; // ganti sesuai IP kamu
+const ESP32_URL = 'https://raw.githubusercontent.com/mdbootstrap/education/master/img/Photos/Horizontal/Nature/1.jpg';
 
 app.get('/video', (req, res) => {
   res.setHeader('Content-Type', 'multipart/x-mixed-replace; boundary=frame');
