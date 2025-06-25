@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // 🔁 Streaming dari ESP32-CAM
-const ESP32_URL = 'https://raw.githubusercontent.com/mdbootstrap/education/master/img/Photos/Horizontal/Nature/1.jpg';
+const ESP32_URL = 'http://195.144.13.42/mjpg/video.mjpg';
 
 app.get('/video', (req, res) => {
   res.setHeader('Content-Type', 'multipart/x-mixed-replace; boundary=frame');
