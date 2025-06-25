@@ -1,9 +1,9 @@
 {
   "name": "esp32-stream-project",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "proxy-api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node proxy-api.js"
   },
   "keywords": [],
   "author": "",
