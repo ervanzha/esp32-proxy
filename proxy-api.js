@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // 🔁 Streaming dari ESP32-CAM
-const ESP32_URL = 'http://195.144.13.42/mjpg/video.mjpg';
+const ESP32_URL = 'http://192.168.127.26:81/stream';
 
 app.get('/video', (req, res) => {
   res.setHeader('Content-Type', 'multipart/x-mixed-replace; boundary=frame');
