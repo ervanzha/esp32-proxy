@@ -42,6 +42,7 @@ app.get('/video', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-http.createServer(app).listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Proxy running on port ${PORT}`);
 });
+
