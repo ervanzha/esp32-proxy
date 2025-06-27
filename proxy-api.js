@@ -3,7 +3,7 @@ const request = require('request');
 const app = express();
 
 // ✅ Gunakan webcam publik (St-Malo) sebagai dummy stream
-const ESP32_URL = 'http://webcam.st-malo.com/axis-cgi/mjpg/video.cgi';
+const ESP32_URL = 'http://195.201.36.45/mjpg/video.mjpg';
 
 app.get('/', (req, res) => {
   res.send(`
