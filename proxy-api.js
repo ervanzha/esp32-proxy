@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 });
 
 // ✅ Route stream
-const ESP32_URL = 'http://192.168.127.26:81/stream'; // atau link testing MJPEG
+const ESP32_URL = 'http://195.144.13.42/mjpg/video.mjpg'; // atau link testing MJPEG
 
 app.get('/video', (req, res) => {
   res.setHeader('Content-Type', 'multipart/x-mixed-replace; boundary=frame');
