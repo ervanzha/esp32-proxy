@@ -1,46 +1,32 @@
 const express = require('express');
-const axios = require('axios');
+const request = require('request');
 const app = express();
 
-// ✅ Route utama
+// ✅ Gunakan webcam publik (St-Malo) sebagai dummy stream
+const ESP32_URL = 'http://webcam.st-malo.com/axis-cgi/mjpg/video.cgi';
+
 app.get('/', (req, res) => {
   res.send(`
-    <h1>ESP32-CAM Stream</h1>
-    <img src="/video" style="width:640px; border:2px solid #333;" />
+    <h1>ESP32-CAM Stream (Testing)</h1>
+    <img src="/video" style="width: 640px; border: 2px solid #000;" />
   `);
 });
 
-// ✅ MJPEG stream publik untuk test
-const ESP32_URL = 'http://91.191.213.122:8080/mjpg/video.mjpg'; // MJPEG online
-
-// ✅ Route stream
-app.get('/video', async (req, res) => {
+app.get('/video', (req, res) => {
+  console.log('Opening MJPEG stream...');
   res.setHeader('Content-Type', 'multipart/x-mixed-replace; boundary=frame');
 
-  try {
-    console.log('Opening MJPEG stream...');
+  const stream = request.get(ESP32_URL);
 
-    const stream = await axios({
-      method: 'get',
-      url: ESP32_URL,
-      responseType: 'stream',
-      timeout: 10000,
-      headers: {
-        'User-Agent': 'Mozilla/5.0'
-      }
-    });
-
-    console.log('Streaming MJPEG to client...');
-    req.on('close', () => {
-      stream.data.destroy();
-      console.log('Client disconnected');
-    });
-
-    stream.data.pipe(res);
-  } catch (err) {
-    console.error('Streaming error:', err.message);
+  stream.on('error', err => {
+    console.log('Streaming error:', err.message);
     res.status(500).send('Stream error');
-  }
+  });
+
+  req.on('close', () => stream.destroy());
+
+  console.log('Streaming MJPEG to client...');
+  stream.pipe(res);
 });
 
 const PORT = process.env.PORT || 8080;
